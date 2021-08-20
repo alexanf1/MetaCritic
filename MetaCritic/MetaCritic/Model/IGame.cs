@@ -21,12 +21,12 @@ namespace MetaCritic.Model
         /// <summary>
         /// The release date of the game.
         /// </summary>
-        public DateTime? ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         /// <summary>
         /// The aggregate reviewers score of the game.
         /// </summary>
-        public int? Score { get; set; }
+        public int Score { get; set; }
 
         /// <summary>
         /// The general description of the game.

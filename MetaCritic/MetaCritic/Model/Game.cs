@@ -8,12 +8,17 @@ namespace MetaCritic.Model
     /// <inheritdoc />
     public class Game : IGame
     {
+        /// <summary>
+        /// Instantiates a Game Object with a name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <exception cref="MetaCriticInvalidGameException">Throws an exception if an invalid name is provided.</exception>
         public Game(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new MetaCriticInvalidGameException($"{typeof(Game)} could not be created!",
-                    new ArgumentException("Name is required.", nameof(name)));
+                    new ArgumentException("Name is invalid.", nameof(name)));
             }
 
             Name = name;
@@ -26,10 +31,10 @@ namespace MetaCritic.Model
         public string Platform { get; set; }
 
         /// <inheritdoc />
-        public DateTime? ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         /// <inheritdoc />
-        public int? Score { get; set; }
+        public int Score { get; set; }
 
         /// <inheritdoc />
         public string Description { get; set; }
