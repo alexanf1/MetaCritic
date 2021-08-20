@@ -22,7 +22,7 @@ namespace MetaCritic.Query
         public async Task<IEnumerable<IGame>> ExecuteAsync(IGameQueryDefinition<IGame> queryDefinition)
         {
             var content = await GetSearchPageContent(queryDefinition);
-            var entities = m_searchScraper.Scrape<Game>(content);
+            var entities = m_searchScraper.Scrape<IGame>(content);
 
             return entities;
         }
