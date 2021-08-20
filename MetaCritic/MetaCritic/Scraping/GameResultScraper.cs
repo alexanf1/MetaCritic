@@ -1,0 +1,64 @@
+﻿
+namespace MetaCritic.Scraping
+{
+    using HtmlAgilityPack;
+    using Model;
+    using System;
+
+    public class GameResultScraper : IGameResultScraper<IGame>
+    {
+        public IGame Scrape(HtmlNode node)
+        {
+            var name = ReadName(node);
+            var game = new Game(name)
+            {
+                ReleaseDate = ReadReleaseDate(node),
+                Description = ReadDescription(node),
+                Platform = ReadPlatform(node),
+                Score = ReadScore(node)
+            };
+
+            return game;
+        }
+
+        private string ReadValue(HtmlNode node, string path)
+        {
+            if (node == null) 
+                return null;
+
+            var result = node.SelectSingleNode(path);
+
+            return result == null ? null : HtmlEntity.DeEntitize(result.InnerText.Trim());
+        }
+
+        private string ReadName(HtmlNode node)
+        {
+            return ReadValue(node, "./td[@class=\"clamp-summary-wrap\"]/a/h3");
+        }
+
+        private string ReadDescription(HtmlNode node)
+        {
+            return ReadValue(node, "./td[@class=\"clamp-summary-wrap\"]/div[@class=\"summary\"]");
+        }
+
+        private string ReadPlatform(HtmlNode node)
+        {
+            return ReadValue(node, "./td[@class=\"clamp-summary-wrap\"]/div[@class=\"clamp-details\"]/div[@class=\"platform\"]/span[@class=\"data\"]");
+        }
+
+        private int? ReadScore(HtmlNode node)
+        {
+            var score = ReadValue(node, "./td[@class=\"clamp-summary-wrap\"]/div[@class=\"clamp-score-wrap\"]/a[@class=\"metascore_anchor\"]/div");
+            
+            int.TryParse(score, out int result);
+            
+            return result;
+        }
+
+        private DateTime? ReadReleaseDate(HtmlNode node)
+        {
+            var releaseDate = ReadValue(node, "./td[@class=\"clamp-summary-wrap\"]/div[@class=\"clamp-details\"]/span");
+            return DateTime.Parse(releaseDate);
+        }
+    }
+}
