@@ -12,7 +12,12 @@ namespace MetaCritic.Scraping
     /// <inheritdoc />
     public class GameScraper : IGameScraper
     {
-        private static readonly IGameResultScraper<IGame> m_scraper = new GameResultScraper();
+        private readonly IGameResultScraper<IGame> m_scraper;
+
+        public GameScraper(IGameResultScraper<IGame> scraper)
+        {
+            m_scraper = scraper;
+        }
 
         /// <inheritdoc />
         public IEnumerable<T> Scrape<T>(string content) where T : IGame

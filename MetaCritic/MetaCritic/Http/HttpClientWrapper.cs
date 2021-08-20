@@ -13,7 +13,7 @@ namespace MetaCritic.Http
         private static readonly HttpClient m_client = new HttpClient();
 
         /// <inheritdoc />
-        public async Task<string> GetContentAsync(string address)
+        public async Task<string> GetContentAsync(Uri address)
         {
             try
             {

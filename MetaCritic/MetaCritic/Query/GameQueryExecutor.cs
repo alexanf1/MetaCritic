@@ -1,4 +1,6 @@
 ﻿
+using MetaCritic.Uri;
+
 namespace MetaCritic.Query
 {
     using Http;
@@ -22,9 +24,8 @@ namespace MetaCritic.Query
         public async Task<IEnumerable<IGame>> ExecuteAsync(IGameQueryDefinition<IGame> queryDefinition)
         {
             var content = await GetSearchPageContent(queryDefinition);
-            var entities = m_searchScraper.Scrape<IGame>(content);
 
-            return entities;
+            return m_searchScraper.Scrape<IGame>(content);
         }
 
         private async Task<string> GetSearchPageContent(IGameQueryDefinition<IGame> queryDefinition)
@@ -41,13 +42,13 @@ namespace MetaCritic.Query
             }
         }
 
-        private string GetSearchUri(IGameQueryDefinition<IGame> queryDefinition)
+        private Uri GetSearchUri(IGameQueryDefinition<IGame> queryDefinition)
         {
             return UriGenerator.Create()
                 .ForCategory(queryDefinition.Category)
                 .ForPlatform(queryDefinition.Platform)
                 .SortBy(queryDefinition.Sort)
-                .Generate("test");
+                .Generate();
         }
     }
 }

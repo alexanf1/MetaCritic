@@ -4,7 +4,7 @@ namespace MetaCritic.Model
     using System;
 
     /// <summary>
-    /// An object representing a video game.
+    /// Defines an object representing a video game.
     /// </summary>
     public interface IGame
     {
