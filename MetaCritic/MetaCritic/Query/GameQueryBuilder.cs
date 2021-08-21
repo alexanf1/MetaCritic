@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MetaCritic.Http;
 using MetaCritic.Model;
+using MetaCritic.Scraping;
 
 namespace MetaCritic.Query
 {
@@ -17,7 +19,13 @@ namespace MetaCritic.Query
 
         public async Task<IEnumerable<IGame>> GetAsync()
         {
-            return await m_queryDefinition.ExecuteAsync();
+            // todo: move into a factory...
+            HttpClientWrapper client = new HttpClientWrapper();
+            GameResultScraper resultScraper = new GameResultScraper();
+            GameScraper scraper = new GameScraper(resultScraper);
+            var queryExecutor = new GameQueryExecutor(client, scraper);
+
+            return await queryExecutor.ExecuteAsync(m_queryDefinition);
         }
 
         #region Availability
