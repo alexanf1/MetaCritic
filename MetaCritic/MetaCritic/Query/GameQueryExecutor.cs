@@ -48,6 +48,7 @@ namespace MetaCritic.Query
                 .ForCategory(queryDefinition.Category)
                 .ForPlatform(queryDefinition.Platform)
                 .SortBy(queryDefinition.Sort)
+                .ByTime(queryDefinition.Time)
                 .Generate();
         }
     }

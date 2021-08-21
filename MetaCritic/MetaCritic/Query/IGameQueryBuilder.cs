@@ -1,38 +1,20 @@
 ﻿
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MetaCritic.Model;
 
 namespace MetaCritic.Query
 {
     public interface IGameQueryBuilder<T> where T : IGame
     {
-        Task<IEnumerable<IGame>> GetAsync();
+        ITimeGameQueryBuilder<T> ByYear(int year);
 
-        IGameQueryBuilder<T> AllReleases();
+        ITimeGameQueryBuilder<T> AllTime();
 
-        IGameQueryBuilder<T> ComingSoon();
+        ITimeGameQueryBuilder<T> Last90Days();
 
-        IGameQueryBuilder<T> NewReleases();
+        IReleaseGameQueryBuilder<T> AllReleases();
+        
+        IReleaseGameQueryBuilder<T> ComingSoon();
 
-        IGameQueryBuilder<T> PS5();
-
-        IGameQueryBuilder<T> PS4();
-
-        IGameQueryBuilder<T> XboxSeriesX();
-
-        IGameQueryBuilder<T> XboxOne();
-
-        IGameQueryBuilder<T> Switch();
-
-        IGameQueryBuilder<T> PC();
-
-        IGameQueryBuilder<T> Stadia();
-
-        IGameQueryBuilder<T> ByDate();
-
-        IGameQueryBuilder<T> ByMetaScore();
-
-        IGameQueryBuilder<T> ByName();
+        IReleaseGameQueryBuilder<T> NewReleases();
     }
 }

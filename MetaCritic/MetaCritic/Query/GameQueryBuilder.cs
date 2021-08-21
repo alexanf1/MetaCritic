@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MetaCritic.Filters;
 using MetaCritic.Http;
 using MetaCritic.Model;
 using MetaCritic.Scraping;
 
 namespace MetaCritic.Query
 {
-    public class GameQueryBuilder<T> : IGameQueryBuilder<T> where T : IGame
+    public class GameQueryBuilder<T> : IGameQueryBuilder<T>, ITimeGameQueryBuilder<T>,
+        IPlatformGameQueryBuilder<T>, ISortGameQueryBuilder<T>, IReleaseGameQueryBuilder<T> where T : IGame
     {
         private readonly IGameQueryDefinition<IGame> m_queryDefinition;
         
@@ -28,89 +30,112 @@ namespace MetaCritic.Query
             return await queryExecutor.ExecuteAsync(m_queryDefinition);
         }
 
-        #region Availability
-        public IGameQueryBuilder<T> AllReleases()
+        #region Time Based Filters
+        public ITimeGameQueryBuilder<T> ByYear(int year)
         {
-            m_queryDefinition.Category = Category.AllReleases;
+            m_queryDefinition.Time = TimeFilter.Year;
+            m_queryDefinition.Time.Value = year;
 
             return this;
         }
-        public IGameQueryBuilder<T> ComingSoon()
+        public ITimeGameQueryBuilder<T> AllTime()
         {
-            m_queryDefinition.Category = Category.ComingSoon;
+            m_queryDefinition.Time = TimeFilter.AllTime;
 
             return this;
         }
 
-        public IGameQueryBuilder<T> NewReleases()
+        public ITimeGameQueryBuilder<T> Last90Days()
         {
-            m_queryDefinition.Category = Category.NewReleases;
-
-            return this;
-        }
-        #endregion
-
-        #region Platform
-        public IGameQueryBuilder<T> PS5()
-        {
-            m_queryDefinition.Platform = Platform.PS5;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> PS4()
-        {
-            m_queryDefinition.Platform = Platform.PS4;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> XboxSeriesX()
-        {
-            m_queryDefinition.Platform = Platform.XboxSeriesX;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> XboxOne()
-        {
-            m_queryDefinition.Platform = Platform.XboxOne;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> Switch()
-        {
-            m_queryDefinition.Platform = Platform.Switch;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> PC()
-        {
-            m_queryDefinition.Platform = Platform.PC;
-
-            return this;
-        }
-        public IGameQueryBuilder<T> Stadia()
-        {
-            m_queryDefinition.Platform = Platform.Stadia;
+            m_queryDefinition.Time = TimeFilter.Last90Days;
 
             return this;
         }
         #endregion
 
-        #region Sort
-        public IGameQueryBuilder<T> ByDate()
+        #region Release Based Filters
+        public IReleaseGameQueryBuilder<T> AllReleases()
         {
-            m_queryDefinition.Sort = Sort.ByDate;
+            m_queryDefinition.Category = ReleaseFilter.AllReleases;
 
             return this;
         }
-        public IGameQueryBuilder<T> ByMetaScore()
+        public IReleaseGameQueryBuilder<T> ComingSoon()
         {
-            m_queryDefinition.Sort = Sort.ByMetaScore;
+            m_queryDefinition.Category = ReleaseFilter.ComingSoon;
 
             return this;
         }
-        public IGameQueryBuilder<T> ByName()
+
+        public IReleaseGameQueryBuilder<T> NewReleases()
         {
-            m_queryDefinition.Sort = Sort.ByName;
+            m_queryDefinition.Category = ReleaseFilter.NewReleases;
+
+            return this;
+        }
+        #endregion
+
+        #region Platform Based Filters
+        public IPlatformGameQueryBuilder<T> PS5()
+        {
+            m_queryDefinition.Platform = PlatformFilter.PS5;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> PS4()
+        {
+            m_queryDefinition.Platform = PlatformFilter.PS4;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> XboxSeriesX()
+        {
+            m_queryDefinition.Platform = PlatformFilter.XboxSeriesX;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> XboxOne()
+        {
+            m_queryDefinition.Platform = PlatformFilter.XboxOne;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> Switch()
+        {
+            m_queryDefinition.Platform = PlatformFilter.Switch;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> PC()
+        {
+            m_queryDefinition.Platform = PlatformFilter.PC;
+
+            return this;
+        }
+        public IPlatformGameQueryBuilder<T> Stadia()
+        {
+            m_queryDefinition.Platform = PlatformFilter.Stadia;
+
+            return this;
+        }
+        #endregion
+
+        #region Sort Based Filters
+        public ISortGameQueryBuilder<T> ByDate()
+        {
+            m_queryDefinition.Sort = SortFilter.ByDate;
+
+            return this;
+        }
+        public ISortGameQueryBuilder<T> ByMetaScore()
+        {
+            m_queryDefinition.Sort = SortFilter.ByMetaScore;
+
+            return this;
+        }
+        public ISortGameQueryBuilder<T> ByName()
+        {
+            m_queryDefinition.Sort = SortFilter.ByName;
 
             return this;
         }
