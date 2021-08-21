@@ -1,6 +1,11 @@
 ﻿
-namespace MetaCritic.Query
+using MetaCritic.Query;
+
+namespace MetaCritic.Uri
 {
+    /// <summary>
+    /// A set of extension methods for <see cref="UriGenerator"/>
+    /// </summary>
     public static class IUriGeneratorExtensions
     {
         public static IUriGenerator ForCategory(this IUriGenerator uriGenerator, Category category)

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using MetaCritic.Model;
 
-namespace MetaCritic
+namespace MetaCritic.Test.ConsoleApplication
 {
     class Program
     {
         static async Task Main(string[] args)
         {
-            var games = await MetaCritic.SearchFor().Games().PC().ByName().NewReleases().GetAsync();
-            Output("GAMES",games.ToList());
+            var games = await MetaCritic.SearchFor().Games().PC().AllReleases().ByMetaScore().GetAsync();
+            Output("GAMES", games.ToList());
         }
 
         private static void Output(string description, IEnumerable<IGame> entities)

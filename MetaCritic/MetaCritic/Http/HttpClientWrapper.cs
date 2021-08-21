@@ -1,21 +1,32 @@
 ﻿
+using MetaCritic.Exceptions;
+
 namespace MetaCritic.Http
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    /// <inheritdoc />
     public class HttpClientWrapper : IHttpClientWrapper
     {
-        private static readonly HttpClient m_client;
+        private static readonly HttpClient m_client = new HttpClient();
 
-        static HttpClientWrapper()
+        /// <inheritdoc />
+        public async Task<string> GetContentAsync(Uri address)
         {
-            m_client = new HttpClient();
-        }
-
-        public async Task<string> GetContentAsync(string address)
-        {
-            return await m_client.GetStringAsync(address);
+            try
+            {
+                return await m_client.GetStringAsync(address);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new MetaCriticGetContentFailedException($"Invalid Uri provided: {nameof(address)}", e);
+            }
+            catch (HttpRequestException e)
+            {
+                throw new MetaCriticGetContentFailedException($"Failed retrieve content", e);
+            }
         }
     }
 }
