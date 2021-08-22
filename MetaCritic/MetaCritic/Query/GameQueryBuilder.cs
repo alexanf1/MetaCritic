@@ -10,7 +10,8 @@ using MetaCritic.Scraping;
 namespace MetaCritic.Query
 {
     public class GameQueryBuilder<T> : IGameQueryBuilder<T>, ITimeGameQueryBuilder<T>,
-        IPlatformGameQueryBuilder<T>, ISortGameQueryBuilder<T>, IReleaseGameQueryBuilder<T> where T : IGame
+        IPlatformGameQueryBuilder<T>, ISortGameQueryBuilder<T>, 
+        IReleaseGameQueryBuilder<T>, IGenreGameQueryBuilder<T> where T : IGame
     {
         private readonly IGameQueryDefinition<IGame> m_queryDefinition;
         
@@ -136,6 +137,134 @@ namespace MetaCritic.Query
         public ISortGameQueryBuilder<T> ByName()
         {
             m_queryDefinition.Sort = SortFilter.ByName;
+
+            return this;
+        }
+        #endregion
+
+        #region Genre Filters
+        public IGenreGameQueryBuilder<T> Action()
+        {
+            m_queryDefinition.Genre = GenreFilter.Action;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Adventure()
+        {
+            m_queryDefinition.Genre = GenreFilter.Adventure;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Fighting()
+        {
+            m_queryDefinition.Genre = GenreFilter.Fighting;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> FirstPersonShooter()
+        {
+            m_queryDefinition.Genre = GenreFilter.FirstPersonShooter;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Flight()
+        {
+            m_queryDefinition.Genre = GenreFilter.Flight;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Party()
+        {
+            m_queryDefinition.Genre = GenreFilter.Party;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Platformer()
+        {
+            m_queryDefinition.Genre = GenreFilter.Platformer;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Puzzle()
+        {
+            m_queryDefinition.Genre = GenreFilter.Puzzle;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Racing()
+        {
+            m_queryDefinition.Genre = GenreFilter.Racing;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> RealTimeStrategy()
+        {
+            m_queryDefinition.Genre = GenreFilter.RealTimeStrategy;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> RolePlaying()
+        {
+            m_queryDefinition.Genre = GenreFilter.RolePlaying;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Simulation()
+        {
+            m_queryDefinition.Genre = GenreFilter.Simulation;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Sports()
+        {
+            m_queryDefinition.Genre = GenreFilter.Sports;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Strategy()
+        {
+            m_queryDefinition.Genre = GenreFilter.Strategy;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> ThirdPersonShooter()
+        {
+            m_queryDefinition.Genre = GenreFilter.ThirdPersonShooter;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> TurnBasedStrategy()
+        {
+            m_queryDefinition.Genre = GenreFilter.TurnBasedStrategy;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Wargames()
+        {
+            m_queryDefinition.Genre = GenreFilter.Wargames;
+
+            return this;
+        }
+
+        public IGenreGameQueryBuilder<T> Wrestling()
+        {
+            m_queryDefinition.Genre = GenreFilter.Wrestling;
 
             return this;
         }

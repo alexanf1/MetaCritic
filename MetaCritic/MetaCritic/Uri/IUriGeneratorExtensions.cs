@@ -36,6 +36,13 @@ namespace MetaCritic.Uri
 
             return uriGenerator;
         }
+
+        public static IUriGenerator ByGenre(this IUriGenerator uriGenerator, GenreFilter genre)
+        {
+            uriGenerator.Genre = genre;
+
+            return uriGenerator;
+        }
     }
 }
 

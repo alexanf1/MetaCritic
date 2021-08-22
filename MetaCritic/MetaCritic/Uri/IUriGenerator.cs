@@ -32,6 +32,11 @@ namespace MetaCritic.Uri
         TimeFilter Time { get; set; }
 
         /// <summary>
+        /// Represents the selected genre (e.g. by action, adventure, shooter, etc) for the generated <see cref="Uri"/>
+        /// </summary>
+        GenreFilter Genre { get; set; }
+
+        /// <summary>
         /// Generates a <see cref="Uri"/> based instance defined properties. 
         /// </summary>
         /// <returns>A generated <typeparamref name="Uri"/></returns>

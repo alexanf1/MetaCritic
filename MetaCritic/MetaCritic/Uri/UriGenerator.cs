@@ -9,6 +9,7 @@ namespace MetaCritic.Uri
     {
         private const string BASE_ADDRESS = "https://www.metacritic.com/browse/games/";
         private const string TIME_BASED_ADDRESS = BASE_ADDRESS + "score/metascore";
+        private const string GENRE_BASED_ADDRESS = BASE_ADDRESS + "genre";
         private const string RELEASE_BASED_ADDRESS = BASE_ADDRESS + "release-date";
 
         private const string DEFAULT_ADDRESS = "https://www.metacritic.com/browse/games/score/metascore/all/all/filtered";
@@ -24,6 +25,9 @@ namespace MetaCritic.Uri
 
         /// <inheritdoc />
         public TimeFilter Time { get; set; }
+
+        /// <inheritdoc />
+        public GenreFilter Genre { get; set; }
 
         public static IUriGenerator Create()
         {
@@ -41,6 +45,9 @@ namespace MetaCritic.Uri
 
             if(Release != null)
                 return new System.Uri($"{RELEASE_BASED_ADDRESS}/{Release.Query}/{Platform.Query}/{Sort.Query}?view=detailed&page=0"); 
+
+            if(Genre != null)
+                return new System.Uri($"{GENRE_BASED_ADDRESS}/{Sort.Query}/{Genre.Query}/{Platform.Query}?view=detailed&page=0");
 
             return new System.Uri(DEFAULT_ADDRESS);
         }

@@ -10,7 +10,7 @@ namespace MetaCritic.Test.ConsoleApplication
     {
         static async Task Main(string[] args)
         {
-            var games = await MetaCritic.SearchFor().Games().PC().AllReleases().ByMetaScore().GetAsync();
+            var games = await MetaCritic.SearchFor().Games().Action().PS4().ByMetaScore().GetAsync();
             Output("GAMES", games.ToList());
         }
 

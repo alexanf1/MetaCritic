@@ -11,5 +11,6 @@ namespace MetaCritic.Query
         public ReleaseFilter Category { get; set; }
         public SortFilter Sort { get; set; }
         public TimeFilter Time { get; set; }
+        public GenreFilter Genre { get; set; }
     }
 }
