@@ -3,19 +3,21 @@ using MetaCritic.Model;
 
 namespace MetaCritic.Query
 {
-    public interface IGameQueryBuilder<T> where T : IGame
+    public interface IGenreGameQueryBuilder<T> where T : IGame
     {
-        ITimeGameQueryBuilder<T> ByYear(int year);
+        IPlatformGameQueryBuilder<T> PS5();
 
-        ITimeGameQueryBuilder<T> AllTime();
+        IPlatformGameQueryBuilder<T> PS4();
 
-        ITimeGameQueryBuilder<T> Last90Days();
+        IPlatformGameQueryBuilder<T> XboxSeriesX();
 
-        IReleaseGameQueryBuilder<T> AllReleases();
-        
-        IReleaseGameQueryBuilder<T> ComingSoon();
+        IPlatformGameQueryBuilder<T> XboxOne();
 
-        IReleaseGameQueryBuilder<T> NewReleases();
+        IPlatformGameQueryBuilder<T> Switch();
+
+        IPlatformGameQueryBuilder<T> PC();
+
+        IPlatformGameQueryBuilder<T> Stadia();
 
         IGenreGameQueryBuilder<T> Action();
 

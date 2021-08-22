@@ -1,4 +1,5 @@
 ﻿
+using MetaCritic.Filters;
 using MetaCritic.Query;
 
 namespace MetaCritic.Uri
@@ -13,17 +14,27 @@ namespace MetaCritic.Uri
         /// <summary>
         /// Represents the specified platform for the generated <see cref="Uri"/>
         /// </summary>
-        Platform Platform { get; set; }
+        PlatformFilter Platform { get; set; }
 
         /// <summary>
-        /// Represents the specified category (e.g. AllReleases, NewReleases, etc) for the generated <see cref="Uri"/>
+        /// Represents the specified release timing (e.g. AllReleases, NewReleases, etc) for the generated <see cref="Uri"/>
         /// </summary>
-        Category Category { get; set; }
+        ReleaseFilter Release { get; set; }
 
         /// <summary>
         /// Represents the specified sorting (e.g. by score, data, etc) for the generated <see cref="Uri"/>
         /// </summary>
-        Sort Sort { get; set; }
+        SortFilter Sort { get; set; }
+
+        /// <summary>
+        /// Represents the specified timing (e.g. by year, all time, etc) for the generated <see cref="Uri"/>
+        /// </summary>
+        TimeFilter Time { get; set; }
+
+        /// <summary>
+        /// Represents the selected genre (e.g. by action, adventure, shooter, etc) for the generated <see cref="Uri"/>
+        /// </summary>
+        GenreFilter Genre { get; set; }
 
         /// <summary>
         /// Generates a <see cref="Uri"/> based instance defined properties. 
